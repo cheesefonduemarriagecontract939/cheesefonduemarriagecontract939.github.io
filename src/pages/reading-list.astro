@@ -1,0 +1,60 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import { useTranslations } from "@/i18n";
+import config from "@/config";
+import { readingList, type ReadingStatus } from "@/data/readingList";
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
+
+const groups: ReadingStatus[] = ["在读", "计划中", "已读"];
+---
+
+<Layout title={`${t.pages.readingListTitle} | ${config.site.title}`}>
+  <Header />
+
+  <Breadcrumb />
+
+  <Main
+    pageTitle={t.pages.readingListTitle}
+    pageDesc={t.pages.readingListDesc}
+    class="pb-10"
+  >
+    <div class="grid gap-8">
+      {groups.map(status => (
+        <section>
+          <div class="mb-4 flex items-center gap-3">
+            <h2 class="text-2xl font-semibold">{status}</h2>
+            <span class="text-muted-foreground text-sm">
+              {readingList.filter(item => item.status === status).length} 条
+            </span>
+          </div>
+          <ul class="grid gap-4">
+            {readingList
+              .filter(item => item.status === status)
+              .map(item => (
+                <li class="card-surface px-5 py-5">
+                  <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+                    <div>
+                      <h3 class="text-xl font-semibold">{item.title}</h3>
+                      <p class="text-muted-foreground mt-1 text-sm">
+                        {item.author} · {item.kind}
+                      </p>
+                    </div>
+                    <span class="text-accent text-sm md:pt-1">{item.topic}</span>
+                  </div>
+                  <p class="mt-4 leading-7">{item.note}</p>
+                </li>
+              ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </Main>
+
+  <Footer />
+</Layout>

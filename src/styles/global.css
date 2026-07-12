@@ -1,0 +1,62 @@
+@import "tailwindcss";
+@import "./theme.css";
+@import "./typography.css";
+@import "rehype-callouts/theme/obsidian";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@layer base {
+  * {
+    @apply border-border outline-accent/75;
+    scrollbar-width: auto;
+    scrollbar-color: var(--color-muted) transparent;
+  }
+  body {
+    background-image:
+      radial-gradient(circle at top left, rgb(30 92 76 / 0.08), transparent 34%),
+      linear-gradient(180deg, rgb(255 255 255 / 0.2), transparent 40%);
+  }
+  a,
+  button {
+    @apply outline-accent outline-offset-1 focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+  code,
+  pre,
+  kbd,
+  samp {
+    font-family: var(--font-mono);
+  }
+}
+
+@utility max-w-app {
+  @apply max-w-4xl;
+}
+
+@utility app-layout {
+  @apply max-w-app mx-auto w-full px-4;
+}
+
+@utility active-nav {
+  @apply text-accent underline decoration-dashed decoration-2 underline-offset-8;
+}
+
+@utility card-surface {
+  @apply border-border bg-background/75 rounded-3xl border backdrop-blur-sm;
+}
+
+:target {
+  scroll-margin-block: 1rem;
+}

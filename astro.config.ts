@@ -1,15 +1,13 @@
-import {
-  defineConfig,
-  envField,
-  svgoOptimizer,
-} from "astro/config";
+import { defineConfig, envField, svgoOptimizer } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import { unified } from "@astrojs/markdown-remark";
+import remarkMath from "remark-math";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
 import rehypeCallouts from "rehype-callouts";
+import rehypeKatex from "rehype-katex";
 import {
   transformerNotationDiff,
   transformerNotationHighlight,
@@ -17,6 +15,14 @@ import {
 } from "@shikijs/transformers";
 import { transformerFileName } from "./src/utils/transformers/fileName";
 import config from "./astro-paper.config";
+
+const mathRehypePlugins = [rehypeKatex as any, rehypeCallouts as any];
+const codeTransformers = [
+  transformerFileName({ style: "v2", hideDot: false }) as any,
+  transformerNotationHighlight() as any,
+  transformerNotationWordHighlight() as any,
+  transformerNotationDiff({ matchAlgorithm: "v3" }) as any,
+];
 
 export default defineConfig({
   site: config.site.url,
@@ -37,21 +43,17 @@ export default defineConfig({
   markdown: {
     processor: unified({
       remarkPlugins: [
+        remarkMath,
         remarkToc,
         [remarkCollapse, { test: "Table of contents" }],
       ],
-      rehypePlugins: [rehypeCallouts],
+      rehypePlugins: mathRehypePlugins,
     }),
     shikiConfig: {
       themes: { light: "min-light", dark: "night-owl" },
       defaultColor: false,
       wrap: false,
-      transformers: [
-        transformerFileName({ style: "v2", hideDot: false }),
-        transformerNotationHighlight(),
-        transformerNotationWordHighlight(),
-        transformerNotationDiff({ matchAlgorithm: "v3" }),
-      ],
+      transformers: codeTransformers,
     },
   },
   vite: {

